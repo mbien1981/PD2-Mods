@@ -1,0 +1,8 @@
+{
+    "menu_lp_title": "Loadout Profiles",
+    "menu_lp_desc": "Loadout Profiles Settings Menu",
+    "menu_lp_max_profiles": "Max Profiles",
+    "menu_st_skill_switch_title": "Switch skills",
+    "menu_st_skill_switch_set": "$skill_switch",
+    "menu_st_skill_switch": "Set #"
+}

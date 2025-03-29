@@ -1,0 +1,95 @@
+{
+    "name": "Profiles and Skill Switches",
+    "description": "Loadout profiles from u107 and Skill Switches from u49.",
+    "author": "Overkill Software, backported by _atom",
+    "contact": "steam: 76561197960841550",
+    "version": "1.5",
+    "updates" : [
+		{
+			"identifier" : "loadout_profiles",
+			"host": {
+				"meta": "https://raw.githubusercontent.com/mbien1981/PD2-Mods/main/older_versions/meta.json"
+			}
+		}
+	],
+    "pre_hooks": [
+        {
+            "hook_id": "lib/managers/menu/menucomponentmanager",
+            "script_path": "lua/managers/menu/multiprofileitemgui.lua"
+        },
+        {
+            "hook_id": "lib/setups/setup",
+            "script_path": "lua/managers/multiprofilemanager.lua"
+        },
+        {
+            "hook_id": "lib/setups/setup",
+            "script_path": "lua/core.lua"
+        }
+    ],
+    "hooks": [
+        {
+            "hook_id": "lib/setups/setup",
+            "script_path": "lua/main.lua"
+        },
+        {
+            "hook_id": "lib/managers/menumanager",
+            "script_path": "lua/managers/menumanager.lua"
+        },
+        {
+            "hook_id": "lib/managers/experiencemanager",
+            "script_path": "lua/managers/experiencemanager.lua"
+        },
+        {
+            "hook_id": "lib/managers/hud/hudmissionbriefing",
+            "script_path": "lua/managers/hud/hudmissionbriefing.lua"
+        },
+        {
+            "hook_id": "lib/managers/hudmanager",
+            "script_path": "lua/managers/hudmanager.lua"
+        },
+        {
+            "hook_id": "lib/setups/setup",
+            "script_path": "lua/setups/setup.lua"
+        },
+        {
+            "hook_id": "lib/tweak_data/skilltreetweakdata",
+            "script_path": "lua/tweak_data/skilltreetweakdata.lua"
+        },
+        {
+            "hook_id": "lib/managers/menu/skilltreegui",
+            "script_path": "lua/managers/menu/skilltreegui.lua"
+        },
+        {
+            "hook_id": "lib/managers/skilltreemanager",
+            "script_path": "lua/managers/skilltreemanager.lua"
+        },
+        {
+            "hook_id": "lib/managers/menu/playerinventorygui",
+            "script_path": "lua/managers/menu/playerinventorygui.lua"
+        },
+        {
+            "hook_id": "lib/managers/menu/missionbriefinggui",
+            "script_path": "lua/managers/menu/missionbriefinggui.lua"
+        },
+        {
+            "hook_id": "lib/managers/menu/menuinput",
+            "script_path": "lua/managers/menu/menuinput.lua"
+        },
+        {
+            "hook_id": "lib/managers/blackmarketmanager",
+            "script_path": "lua/managers/blackmarketmanager.lua"
+        },
+        {
+            "hook_id": "lib/managers/playermanager",
+            "script_path": "lua/managers/playermanager.lua"
+        },
+        {
+            "hook_id": "lib/managers/menu/blackmarketgui",
+            "script_path": "lua/managers/menu/blackmarketgui.lua"
+        },
+        {
+            "hook_id": "lib/managers/savefilemanager",
+            "script_path": "lua/managers/savefilemanager.lua"
+        }
+    ]
+}
