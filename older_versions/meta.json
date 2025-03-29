@@ -1,1 +1,12 @@
-[]
+[
+    {
+        "ident": "lower_sensitivity_multiplier",
+        "version": "1",
+        "download_url": "https://github.com/mbien1981/PD2-Mods/blob/main/older_versions/lower_sensitivity_multiplier.zip?raw=true"
+    },
+    {
+        "ident": "loadout_profiles",
+        "version": "1.5",
+        "download_url": "https://github.com/mbien1981/PD2-Mods/blob/main/older_versions/loadout_profiles.zip?raw=true"
+    }
+]
