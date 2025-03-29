@@ -8,5 +8,10 @@
         "ident": "loadout_profiles",
         "version": "1.5",
         "download_url": "https://github.com/mbien1981/PD2-Mods/blob/main/older_versions/loadout_profiles.zip?raw=true"
+    },
+    {
+        "ident": "use_deployables_on_carry_state",
+        "version": "1",
+        "download_url": "https://github.com/mbien1981/PD2-Mods/blob/main/older_versions/use_deployables_on_carry_state.zip?raw=true"
     }
 ]

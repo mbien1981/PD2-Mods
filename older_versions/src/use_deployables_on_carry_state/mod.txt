@@ -1,0 +1,21 @@
+{
+	"name" : "Use deployables while carrying bags",
+	"description" : "Deployables can now be used while carrying a bag. Press [KEYBIND] to throw bag, hold [KEYBIND] to deploy your deployable.",
+	"author" : "_atom",
+	"contact" : "steam: 76561197960841550",
+	"version" : "1",
+	"updates" : [
+		{
+			"identifier" : "use_deployables_on_carry_state",
+			"host": {
+				"meta": "https://raw.githubusercontent.com/mbien1981/PD2-Mods/main/older_versions/meta.json"
+			}
+		}
+	],
+	"hooks" : [
+		{ 	
+			"hook_id" : "lib/units/beings/player/states/playercarry",
+			"script_path" : "playercarry.lua"
+		}
+	]
+}
