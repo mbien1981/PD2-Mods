@@ -1,0 +1,21 @@
+{
+	"name" : "Lower Sensitivity Multiplier",
+	"description" : "Makes mouse sensitivity multiplier lower, intended for 3200 dpi.",
+	"author" : "_atom",
+	"contact" : "steam: 76561197960841550",
+	"version" : "1",
+	"updates" : [
+		{
+			"identifier" : "lower_sensitivity_multiplier",
+			"host": {
+				"meta": "https://raw.githubusercontent.com/mbien1981/PD2-Mods/main/older_versions/meta.json"
+			}
+		}
+	],
+	"hooks" : [
+		{ 	
+			"hook_id" : "lib/managers/menumanager",
+			"script_path" : "menumanager.lua"
+		}
+	]
+}

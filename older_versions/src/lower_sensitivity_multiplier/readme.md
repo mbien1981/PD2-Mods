@@ -1,0 +1,1 @@
+Intended for older versions of the game (pre u148) where its hard to aim when using high DPI values even at 0% sensitivity settings.
