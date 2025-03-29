@@ -1,0 +1,11 @@
+{
+    "name": "Select Refresh Rate",
+    "description": "Allows you to select screen refresh rate after changing the game resolution.",
+    "author": "DorentuZ`",
+    "hooks": [
+        {
+            "hook_id": "lib/managers/menumanager",
+            "script_path": "lua/menumanager.lua"
+        }
+    ]
+}
