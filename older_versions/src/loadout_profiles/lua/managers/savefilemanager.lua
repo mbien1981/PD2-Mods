@@ -65,7 +65,7 @@ Hooks:OverrideFunction(SavefileManager, "_save_cache", function(self, slot)
 	self:_set_synched_cache(slot, false)
 end)
 
-Hooks:PostHook(function(self, slot)
+Hooks:PostHook(SavefileManager, "_load_cache", "LP:SavefileManager._load_cache",function(self, slot)
 	if slot == self.SETTING_SLOT then
 		return
 	end
