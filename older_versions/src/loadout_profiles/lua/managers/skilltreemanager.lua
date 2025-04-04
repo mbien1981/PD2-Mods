@@ -3,7 +3,22 @@ if Application:version() >= "1.23.0" then -- u49 onwards
 	return
 end
 
-local u39_or_onwards = Application:version() >= "1.16.1"
+local u39_or_above = Application:version() >= "1.16.1"
+
+local table_get = function(t, ...)
+	if not t then
+		return nil
+	end
+	local v, keys = t, { ... }
+	for i = 1, #keys do
+		v = v[keys[i]]
+		if v == nil then
+			break
+		end
+	end
+
+	return v
+end
 
 SkillTreeManager = SkillTreeManager or class()
 SkillTreeManager.VERSION = 6
@@ -19,12 +34,11 @@ function SkillTreeManager:all_skilltree_ids()
 end
 
 function SkillTreeManager:get_skill_points(skill, index)
-	local points = tweak_data.skilltree.skills[skill][index]
-			and tweak_data.skilltree.skills[skill][index].cost
-			and Application:digest_value(tweak_data.skilltree.skills[skill][index].cost, false)
-		or 0
+	local points = table_get(tweak_data.skilltree, "skills", skill, index, "cost")
+	points = Application:digest_value(tweak_data.skilltree.skills[skill][index].cost, false) or 0
+
 	local total_points = points
-	if 0 < points then
+	if points > 0 then
 		for _, tree in ipairs(tweak_data.skilltree.trees) do
 			if tree.skill == skill then
 				local unlocked = self:trees_unlocked()
@@ -36,6 +50,7 @@ function SkillTreeManager:get_skill_points(skill, index)
 			end
 		end
 	end
+
 	return total_points, points
 end
 
@@ -44,12 +59,7 @@ function SkillTreeManager:tier_cost(tree, tier)
 	if managers.experience:current_rank() > 0 then
 		local tree_name = tweak_data.skilltree.trees[tree].skill
 		for infamy, item in pairs(tweak_data.infamy.items) do
-			if
-				managers.infamy:owned(infamy)
-				and item.upgrades
-				and item.upgrades.skilltree
-				and item.upgrades.skilltree.tree == tree_name
-			then
+			if managers.infamy:owned(infamy) and table_get(item, "upgrades", "skilltree", "tree") == tree_name then
 				points = math.round(points * (item.upgrades.skilltree.multiplier or 1))
 			end
 		end
@@ -91,6 +101,7 @@ function SkillTreeManager:_setup(reset)
 		self._global.skills = data.skills
 		self:_setup_specialization()
 	end
+
 	self._global = Global.skilltree_manager
 end
 
@@ -126,7 +137,7 @@ function SkillTreeManager:_setup_skill_switches()
 end
 
 function SkillTreeManager:_setup_specialization()
-	if not u39_or_onwards then
+	if not u39_or_above then
 		return
 	end
 
@@ -567,7 +578,7 @@ function SkillTreeManager:reset_skilltrees_and_specialization(points_aquired_dur
 end
 
 function SkillTreeManager:reset_specializations()
-	if not u39_or_onwards then
+	if not u39_or_above then
 		return
 	end
 
@@ -810,9 +821,6 @@ function SkillTreeManager:open_quick_select()
 		cancel_button = true,
 		is_focused_button = true,
 	})
-
-	-- not implemented --
-	-- managers.menu:open_node("skill_switch", {})
 
 	_G["QuickMenu"]:new("", "", button_list, true)
 end

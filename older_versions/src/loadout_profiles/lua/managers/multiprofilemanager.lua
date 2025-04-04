@@ -1,4 +1,4 @@
-local get = function(t, ...)
+local table_get = function(t, ...)
 	if not t then
 		return nil
 	end
@@ -21,7 +21,7 @@ function MultiProfileManager:init()
 	self._global = self._global or Global.multi_profile
 	self._global._profiles = self._global._profiles or {}
 	self._global._current_profile = self._global._current_profile or 1
-	self._max_profiles = get(LoadoutProfiles, "settings", "max_profiles") or 5
+	self._max_profiles = table_get(LoadoutProfiles, "settings", "max_profiles") or 15
 
 	self:_check_amount()
 end
@@ -151,24 +151,6 @@ function MultiProfileManager:has_previous()
 end
 
 function MultiProfileManager:open_quick_select()
-	local dialog_data = {
-		title = "",
-		text = "",
-		button_list = {},
-		image_blend_mode = "normal",
-		text_blend_mode = "add",
-		use_text_formating = true,
-		w = 480,
-		h = 532,
-		title_font = tweak_data.menu.pd2_medium_font,
-		title_font_size = tweak_data.menu.pd2_medium_font_size,
-		font = tweak_data.menu.pd2_small_font,
-		font_size = tweak_data.menu.pd2_small_font_size,
-		text_formating_color = Color.white,
-		text_formating_color_table = {},
-		clamp_to_screen = true,
-	}
-
 	local button_list = {}
 
 	for idx, profile in pairs(self._global._profiles) do
@@ -190,9 +172,6 @@ function MultiProfileManager:open_quick_select()
 		cancel_button = true,
 		is_focused_button = true,
 	})
-
-	-- not implemented --
-	-- managers.system_menu:show_buttons(dialog_data)
 
 	-- does not support scrolling if the menu is too large, cannot be closed with escape
 	_G["QuickMenu"]:new("", "", button_list, true)

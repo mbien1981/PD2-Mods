@@ -5,23 +5,6 @@ end
 
 local SavefileManager = _G["SavefileManager"]
 
-local orig__load_cache = SavefileManager._load_cache
-function SavefileManager:_load_cache(slot)
-	orig__load_cache(self, slot)
-
-	if slot == self.SETTING_SLOT then
-		return
-	end
-
-	local meta_data = self:_meta_data(slot)
-	local cache = meta_data.cache
-
-	if cache then
-		local version = cache.version or 0
-		managers.multi_profile:load(cache, version)
-	end
-end
-
 local manager_list = {
 	"player",
 	"experience",
@@ -41,7 +24,7 @@ local manager_list = {
 	"multi_profile",
 }
 
-function SavefileManager:_save_cache(slot)
+Hooks:OverrideFunction(SavefileManager, "_save_cache", function(self, slot)
 	local is_setting_slot = slot == self.SETTING_SLOT
 
 	if is_setting_slot then
@@ -51,6 +34,7 @@ function SavefileManager:_save_cache(slot)
 		if old_slot then
 			self:_set_cache(old_slot, nil)
 		end
+
 		self:_set_current_game_cache_slot(slot)
 	end
 
@@ -79,4 +63,18 @@ function SavefileManager:_save_cache(slot)
 
 	self:_set_cache(slot, cache)
 	self:_set_synched_cache(slot, false)
-end
+end)
+
+Hooks:PostHook(function(self, slot)
+	if slot == self.SETTING_SLOT then
+		return
+	end
+
+	local meta_data = self:_meta_data(slot)
+	local cache = meta_data.cache
+
+	if cache then
+		local version = cache.version or 0
+		managers.multi_profile:load(cache, version)
+	end
+end)

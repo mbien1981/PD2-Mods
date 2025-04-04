@@ -1,4 +1,4 @@
-local get = function(t, ...)
+local table_get = function(t, ...)
 	if not t then
 		return nil
 	end
@@ -113,7 +113,7 @@ function BlackMarketManager:weapon_unlocked_by_crafted(category, slot)
 	local cosmetics = crafted.cosmetics
 	local cosmetic_blueprint = cosmetics
 			and cosmetics.id
-			and get(tweak_data, "blackmarket", "weapon_skins", cosmetics.id, "default_blueprint")
+			and table_get(tweak_data.blackmarket, "weapon_skins", cosmetics.id, "default_blueprint")
 		or {}
 	local unlocked = Global.blackmarket_manager.weapons[weapon_id].unlocked
 

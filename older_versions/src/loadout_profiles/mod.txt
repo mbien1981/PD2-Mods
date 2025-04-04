@@ -3,7 +3,7 @@
     "description": "Loadout profiles from u107 and Skill Switches from u49.",
     "author": "Overkill Software, backported by _atom",
     "contact": "steam: 76561197960841550",
-    "version": "1.5",
+    "version": "1.6",
     "updates" : [
 		{
 			"identifier" : "loadout_profiles",
@@ -50,6 +50,10 @@
         {
             "hook_id": "lib/setups/setup",
             "script_path": "lua/setups/setup.lua"
+        },
+        {
+            "hook_id": "lib/tweak_data/guitweakdata",
+            "script_path": "lua/tweak_data/guitweakdata.lua"
         },
         {
             "hook_id": "lib/tweak_data/skilltreetweakdata",

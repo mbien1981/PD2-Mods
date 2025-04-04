@@ -57,10 +57,7 @@ function MissionBriefingGui:mouse_pressed(button, x, y)
 			if managers.hud:is_inside_mission_briefing_slot(peer_id, "name", fx, fy) then
 				local peer = managers.network:session() and managers.network:session():peer(peer_id)
 				if peer then
-					Steam:overlay_activate(
-						"url",
-						tweak_data.gui.fbi_files_webpage .. "/suspect/" .. peer:user_id() .. "/"
-					)
+					Steam:overlay_activate("url", tweak_data.gui.steam_community .. "/profiles/" .. peer:user_id())
 					return
 				end
 			end
