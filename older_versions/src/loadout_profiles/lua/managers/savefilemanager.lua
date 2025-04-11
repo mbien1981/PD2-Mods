@@ -6,22 +6,29 @@ end
 local SavefileManager = _G["SavefileManager"]
 
 local manager_list = {
-	"player",
-	"experience",
-	"upgrades",
-	"money",
-	"statistics",
-	"skilltree",
-	"blackmarket",
-	"mission",
-	"job",
-	"dlc",
-	"infamy",
-	"features",
-	"gage_assignment",
-	"music",
-	"challenge",
-	"multi_profile",
+	["player"] = true,
+	["experience"] = true,
+	["upgrades"] = true,
+	["money"] = true,
+	["statistics"] = true,
+	["skilltree"] = true,
+	["blackmarket"] = true,
+	["mission"] = "save_job_values",
+	["job"] = true,
+	["dlc"] = true,
+	["infamy"] = true,
+	["features"] = true,
+	["gage_assignment"] = true,
+	["music"] = "save_profile",
+	["challenge"] = true,
+	["multi_profile"] = true,
+	["ban_list"] = true,
+	["crimenet"] = true,
+	["custom_safehouse"] = true,
+	["butler_mirroring"] = true,
+	["mutators"] = true,
+	["tango"] = true,
+	["crime_spree"] = true,
 }
 
 Hooks:OverrideFunction(SavefileManager, "_save_cache", function(self, slot)
@@ -49,10 +56,15 @@ Hooks:OverrideFunction(SavefileManager, "_save_cache", function(self, slot)
 			managers.music:save_settings(cache)
 		end
 	else
-		for _, manager in ipairs(manager_list) do
+		for manager, save_clbk in ipairs(manager_list) do
 			local instance = managers[manager]
-			if instance and instance.save then
-				instance:save(cache)
+
+			if instance then
+				if type(save_clbk) == "string" and type(instance[save_clbk]) == "function" then
+					instance[save_clbk](instance, cache)
+				elseif type(instance.save) == "function" then
+					instance:save(cache)
+				end
 			end
 		end
 	end
@@ -65,7 +77,7 @@ Hooks:OverrideFunction(SavefileManager, "_save_cache", function(self, slot)
 	self:_set_synched_cache(slot, false)
 end)
 
-Hooks:PostHook(SavefileManager, "_load_cache", "LP:SavefileManager._load_cache",function(self, slot)
+Hooks:PostHook(SavefileManager, "_load_cache", "LP:SavefileManager._load_cache", function(self, slot)
 	if slot == self.SETTING_SLOT then
 		return
 	end

@@ -16,7 +16,6 @@ local table_get = function(t, ...)
 			break
 		end
 	end
-
 	return v
 end
 
