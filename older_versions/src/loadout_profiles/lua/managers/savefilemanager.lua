@@ -6,29 +6,29 @@ end
 local SavefileManager = _G["SavefileManager"]
 
 local manager_list = {
-	["player"] = true,
-	["experience"] = true,
-	["upgrades"] = true,
-	["money"] = true,
-	["statistics"] = true,
-	["skilltree"] = true,
-	["blackmarket"] = true,
-	["mission"] = "save_job_values",
-	["job"] = true,
-	["dlc"] = true,
-	["infamy"] = true,
-	["features"] = true,
-	["gage_assignment"] = true,
-	["music"] = "save_profile",
-	["challenge"] = true,
-	["multi_profile"] = true,
-	["ban_list"] = true,
-	["crimenet"] = true,
-	["custom_safehouse"] = true,
-	["butler_mirroring"] = true,
-	["mutators"] = true,
-	["tango"] = true,
-	["crime_spree"] = true,
+	{ "player" },
+	{ "experience" },
+	{ "upgrades" },
+	{ "money" },
+	{ "statistics" },
+	{ "skilltree" },
+	{ "blackmarket" },
+	{ "mission", "save_job_values" },
+	{ "job" },
+	{ "dlc" },
+	{ "infamy" },
+	{ "features" },
+	{ "gage_assignment" },
+	{ "music", "save_profile" },
+	{ "challenge" },
+	{ "multi_profile" },
+	{ "ban_list" },
+	{ "crimenet" },
+	{ "custom_safehouse" },
+	{ "butler_mirroring" },
+	{ "mutators" },
+	{ "tango" },
+	{ "crime_spree" },
 }
 
 Hooks:OverrideFunction(SavefileManager, "_save_cache", function(self, slot)
@@ -56,7 +56,8 @@ Hooks:OverrideFunction(SavefileManager, "_save_cache", function(self, slot)
 			managers.music:save_settings(cache)
 		end
 	else
-		for manager, save_clbk in ipairs(manager_list) do
+		for _, data in ipairs(manager_list) do
+			local manager, save_clbk = data[1], data[2]
 			local instance = managers[manager]
 
 			if instance then

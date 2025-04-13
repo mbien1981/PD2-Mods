@@ -3,7 +3,7 @@
     "description": "Loadout profiles from u107 and Skill Switches from u49.",
     "author": "Overkill Software, backported by _atom",
     "contact": "steam: 76561197960841550",
-    "version": "1.8",
+    "version": "1.9",
     "updates" : [
 		{
 			"identifier" : "loadout_profiles",
