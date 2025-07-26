@@ -506,21 +506,23 @@ function SkillTreeManager:reset_skilltrees()
 	-- MenuCallbackHandler:_update_outfit_information()
 end
 
-local orig_infamy_reset = SkillTreeManager.infamy_reset
-function SkillTreeManager:infamy_reset()
-	local skill_switches_unlocks
-	if self._global.skill_switches then
-		skill_switches_unlocks = {}
-		for i, data in ipairs(self._global.skill_switches) do
-			skill_switches_unlocks[i] = data.unlocked
+if type(SkillTreeManager.infamy_reset) == "function" then
+	local orig_infamy_reset = SkillTreeManager.infamy_reset
+	function SkillTreeManager:infamy_reset()
+		local skill_switches_unlocks
+		if self._global.skill_switches then
+			skill_switches_unlocks = {}
+			for i, data in ipairs(self._global.skill_switches) do
+				skill_switches_unlocks[i] = data.unlocked
+			end
 		end
-	end
 
-	orig_infamy_reset(self)
+		orig_infamy_reset(self)
 
-	if skill_switches_unlocks then
-		for i = 1, #self._global.skill_switches do
-			self._global.skill_switches[i].unlocked = skill_switches_unlocks[i]
+		if skill_switches_unlocks then
+			for i = 1, #self._global.skill_switches do
+				self._global.skill_switches[i].unlocked = skill_switches_unlocks[i]
+			end
 		end
 	end
 end
