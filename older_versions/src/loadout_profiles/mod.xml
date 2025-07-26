@@ -1,0 +1,43 @@
+<mod name="Loadout Profiles"
+    description="Loadout profiles from u107 and Skill Switches from u49."
+    author="Overkill Software, backported by _atom"
+    contact="steam: 76561197960841550"
+    version="1.9"
+    color="Color('bf204b')"
+    cannot_be_disabled="false"
+    early_init="false">
+    <hooks>
+        <group script_path="lua/">
+            <pre :script_path="core.lua" hook_id="lib/setups/setup" />
+            <post :script_path="main.lua" hook_id="lib/setups/setup" />
+
+            <post :script_path="setups/setup.lua" hook_id="lib/setups/setup" />
+
+            <group :script_path="managers/" hook_id="lib/managers/">
+                <pre :script_path="multiprofilemanager.lua"
+                    hook_id="lib/setups/setup" />
+                <pre :script_path="menu/menucomponentmanager.lua"
+                    hook_id="menu/menucomponentmanager" />
+
+                <post :script_path="skilltreemanager.lua" :hook_id="skilltreemanager" />
+                <post :script_path="menumanager.lua" :hook_id="menumanager" />
+                <post :script_path="experiencemanager.lua" :hook_id="experiencemanager" />
+                <post :script_path="hudmanager.lua" :hook_id="hudmanager" />
+                <post :script_path="blackmarketmanager.lua" :hook_id="blackmarketmanager" />
+                <post :script_path="playermanager.lua" :hook_id="playermanager" />
+                <post :script_path="savefilemanager.lua" :hook_id="savefilemanager" />
+
+                <!-- gui crap -->
+                <pre :script_path="menu/multiprofileitemgui.lua" hook_id="lib/setups/setup" />
+
+                <post :script_path="menu/playerinventorygui.lua" :hook_id="menu/playerinventorygui" />
+                <post :script_path="menu/skilltreegui.lua" :hook_id="menu/skilltreegui" />
+                <post :script_path="menu/menuinput.lua" :hook_id="menu/menuinput" />
+                <post :script_path="menu/blackmarketgui.lua" :hook_id="menu/blackmarketgui" />
+                <post :script_path="menu/missionbriefinggui.lua" :hook_id="menu/missionbriefinggui" />
+
+                <post :script_path="hud/hudmissionbriefing.lua" :hook_id="hud/hudmissionbriefing" />
+            </group>
+        </group>
+    </hooks>
+</mod>
