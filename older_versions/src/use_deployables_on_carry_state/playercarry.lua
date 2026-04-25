@@ -17,7 +17,7 @@ function PlayerCarry:_check_use_item(t, input)
 			or self._ext_movement:has_carry_restriction()
 			-- cross-version compatibility check
 			or (self._is_throwing_projectile and self:_is_throwing_projectile() or self._is_throwing_grenade and self:_is_throwing_grenade())
-			or self:_on_zipline()
+			or self._on_zipline and self:_on_zipline()
 
 		if not action_forbidden then
 			managers.player:drop_carry()
