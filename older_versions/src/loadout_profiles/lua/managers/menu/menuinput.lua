@@ -31,28 +31,14 @@ function MenuInput:set_force_input(enabled)
 	self._force_input = enabled
 end
 
-local orig_update = MenuInput.update
-function MenuInput:update(t, dt)
-	orig_update(self, t, dt)
-
-	if not self._accept_input or not self:force_input() then
-		return
-	end
-
-	if 0 < self._page_timer then
-		return
-	end
-
-	if not self._controller then
-		return
-	end
-
+Hooks:PostHook(MenuInput, "update", "LP:MenuInput.update", function(self, t, dt)
 	local button = "menu_switch_skillset"
 	if
 		self._accept_input
+		and self._controller
 		and self._controller:get_input_pressed(button)
 		and managers.menu:active_menu().renderer:special_btn_pressed(Idstring(button))
 	then
 		managers.menu:active_menu().renderer:disable_input(0.2)
 	end
-end
+end)

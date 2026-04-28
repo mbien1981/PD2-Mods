@@ -1,4 +1,4 @@
-Hooks:PostHook(SkillTreeGui, "_setup", "SP_insert_profile_switch_gui", function(self)
+Hooks:PostHook(SkillTreeGui, "_setup", "LP:SkillTreeGui.init", function(self)
 	self._multi_profile_item = MultiProfileItemGui:new(self._ws, self._panel)
 	self._multi_profile_item:panel():set_bottom(self._panel:h())
 	self._multi_profile_item:panel():set_center_x(self._panel:center_x())
@@ -10,8 +10,8 @@ function SkillTreeGui:mouse_moved(o, x, y)
 		return true, "link"
 	end
 
-	if not self._enabled then
-		return
+	if type(self._enabled) ~= "nil" and not self._enabled then
+		return false, "arrow"
 	end
 
 	local used, pointer = orig_mouse_moved(self, o, x, y)
@@ -31,8 +31,8 @@ function SkillTreeGui:mouse_pressed(button, x, y)
 		return
 	end
 
-	if not self._enabled then
-		return
+	if type(self._enabled) ~= "nil" and not self._enabled then
+		return false, "arrow"
 	end
 
 	local result = orig_mouse_pressed(self, button, x, y)
@@ -45,10 +45,12 @@ function SkillTreeGui:mouse_pressed(button, x, y)
 	end
 end
 
-if Application:version() >= "1.23.0" then
+if LoadoutProfiles:version_compare("1.23.0") then
 	log("[SkillTreeGui] Skipped skillset button insertion")
 	return
 end
+
+log("[SkillTreeGui] Insert skillset button")
 
 local NOT_WIN_32 = SystemInfo:platform() ~= Idstring("WIN32")
 local WIDTH_MULTIPLIER = NOT_WIN_32 and 0.6 or 0.6
@@ -169,8 +171,8 @@ function SkillTreeGui:mouse_moved(o, x, y)
 		return true, "link"
 	end
 
-	if not self._enabled then
-		return
+	if type(self._enabled) ~= "nil" and not self._enabled then
+		return false, "arrow"
 	end
 
 	if self:check_skill_switch_button(x, y) then
@@ -187,23 +189,14 @@ function SkillTreeGui:mouse_moved(o, x, y)
 	return used, pointer
 end
 
-local orig_mouse_released = SkillTreeGui.mouse_released
-function SkillTreeGui:mouse_released(button, x, y)
-	if not self._enabled then
-		return
-	end
-
-	orig_mouse_released(self, button, x, y)
-end
-
 function SkillTreeGui:mouse_pressed(button, x, y)
 	if self._renaming_skill_switch then
 		self:_stop_rename_skill_switch()
 		return
 	end
 
-	if not self._enabled then
-		return
+	if type(self._enabled) ~= "nil" and not self._enabled then
+		return false, "arrow"
 	end
 
 	if button == Idstring("0") then
@@ -230,14 +223,23 @@ function SkillTreeGui:mouse_pressed(button, x, y)
 	end
 end
 
+local orig_mouse_released = SkillTreeGui.mouse_released
+function SkillTreeGui:mouse_released(button, x, y)
+	if type(self._enabled) ~= "nil" and not self._enabled then
+		return false, "arrow"
+	end
+
+	orig_mouse_released(self, button, x, y)
+end
+
 function SkillTreeGui:confirm_pressed()
 	if self._renaming_skill_switch then
 		self:_stop_rename_skill_switch()
 		return
 	end
 
-	if not self._enabled then
-		return
+	if type(self._enabled) ~= "nil" and not self._enabled then
+		return false, "arrow"
 	end
 
 	if self._selected_item and self._selected_item._skill_panel then
@@ -290,8 +292,8 @@ end
 
 local orig_update = SkillTreeGui.update
 function SkillTreeGui:update(t, dt)
-	if not self._enabled then
-		return
+	if type(self._enabled) ~= "nil" and not self._enabled then
+		return false, "arrow"
 	end
 
 	orig_update(self, t, dt)

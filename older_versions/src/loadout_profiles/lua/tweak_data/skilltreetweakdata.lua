@@ -35,7 +35,7 @@ Hooks:PostHook(SkillTreeTweakData, "init", "LP_SkillTreeTweakData:init", functio
 		}
 	end
 
-	for _ = 1, (get(LoadoutProfiles, "settings", "max_profiles") or 5) - 5 do
+	for _ = 1, (get(LoadoutProfiles, "settings", "max_profiles") or 15) - 5 do
 		table.insert(self.skill_switches, { locks = { level = 100 } })
 	end
 

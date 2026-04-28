@@ -2,7 +2,6 @@ Hooks:PostHook(BlackMarketGui, "_setup", "LP_BlackMarketGui:_setup", function(se
 	self._multi_profile_item = MultiProfileItemGui:new(self._ws, self._panel)
 	self._multi_profile_item:panel():set_bottom(self._panel:h())
 	self._multi_profile_item:panel():set_center_x(self._panel:center_x())
-	-- self._multi_profile_item:set_name_editing_enabled(false)
 end)
 
 local orig_mouse_moved = BlackMarketGui.mouse_moved

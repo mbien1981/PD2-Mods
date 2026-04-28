@@ -1,9 +1,9 @@
-if Application:version() >= "1.23.0" then -- u49 onwards
+if LoadoutProfiles:version_compare("1.23.0") then -- u49 onwards
 	log("Skipped SkillTreeManager overrides")
 	return
 end
 
-local u39_or_above = Application:version() >= "1.16.1"
+local u39_or_above = LoadoutProfiles:version_compare("1.16.1")
 
 local table_get = function(t, ...)
 	if not t then

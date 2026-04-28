@@ -296,12 +296,7 @@ function MenuNodeSkillSwitchGui:_setup_item_panel(safe_rect, res)
 	self.box_panel:move(-10, -10)
 	self.box_panel:set_layer(51)
 	self.boxgui = BoxGuiObject:new(self.box_panel, {
-		sides = {
-			1,
-			1,
-			1,
-			1,
-		},
+		sides = { 1, 1, 1, 1 },
 	})
 	self.boxgui:set_clipping(false)
 	self.boxgui:set_layer(1000)

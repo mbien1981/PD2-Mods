@@ -6,7 +6,7 @@ function MenuManager:is_steam_controller()
 		or managers.controller:get_default_wrapper_type() == "steam"
 end
 
-if Application:version() >= "1.23.0" then
+if LoadoutProfiles:version_compare("1.23.0") then
 	log("[MenuManager] Skipped SkillSwitchInitiator definition")
 	return
 end
