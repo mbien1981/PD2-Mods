@@ -306,7 +306,7 @@ function BlackMarketManager:equip_weapon(category, slot)
 		managers.statistics:publish_equipped_to_steam()
 	end
 
-	if managers.hud then
+	if managers.hud and managers.hud.recreate_weapon_firemode then
 		managers.hud:recreate_weapon_firemode(HUDManager.PLAYER_PANEL)
 	end
 
